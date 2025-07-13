@@ -33,19 +33,38 @@ python -m casbin_cli.client enforce -m "examples/rbac_model.conf" -p "examples/r
 ## Project Structure
 
 ```
-casbin-python-cli/
-├── casbin_cli/
-│   ├── __init__.py
-│   ├── client.py          # Main entry point and CLI argument parsing
-│   ├── command_executor.py # Dynamic method execution and JSON response
-│   ├── enforcer_factory.py # Enforcer creation and input validation
-│   ├── response.py        # JSON response formatting
-│   └── utils.py           # Utility functions
-├── examples/              # Example configuration files
-├── requirements.txt       # Python dependencies
-├── setup.py               # Package installation script
-└── README.md
+casbin-python-cli/  
+├── .github/  
+│   └── workflows/  
+│       └── release.yml           # GitHub Actions CI/CD  
+├── scripts/  
+│   ├── update_version.py         # Version management  
+│   └── build_binaries.py         # Binary building  
+├── casbin_cli/  
+│   ├── __init__.py  
+│   ├── __version__.py            # Version source  
+│   ├── client.py                 # Main CLI entry point  
+│   ├── command_executor.py       # Command execution  
+│   ├── enforcer_factory.py       # Enforcer creation  
+│   ├── response.py               # Response formatting  
+│   └── utils.py                  # Utilities  
+├── examples/                     # Example configurations  
+├── .releaserc.json              # Semantic release config  
+├── package.json                 # Node.js dependencies  
+├── requirements.txt             # Python dependencies  
+├── setup.py                     # Package setup  
+└── README.md  
 ```
+
+### Release Process
+
+Releases are automated via GitHub Actions:
+
+1. Push commits to `main` branch
+2. Semantic release analyzes commit messages
+3. Automatically generates version numbers and changelog
+4. Builds cross-platform binaries
+5. Publishes to PyPI and GitHub Releases
 
 ## Requirements
 

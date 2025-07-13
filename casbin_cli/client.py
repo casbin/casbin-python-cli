@@ -4,6 +4,7 @@ import json
 from .command_executor import CommandExecutor  
 from .enforcer_factory import EnforcerFactory  
 from .utils import process_line_breaks  
+from .__version__ import __version__
   
 class Client:  
     @staticmethod  
@@ -23,10 +24,10 @@ class Client:
             if command_name in ['-h', '--help']:  
                 Client._print_help()  
                 return ""  
-            elif command_name in ['-v', '--version']:  
-                print("casbin-python-cli 1.0.0")  
-                print("pycasbin 1.17.0")  
-                return ""  
+            #elif command_name in ['-v', '--version']:  
+            #    print(f"casbin-python-cli {__version__}")  
+            #    print("pycasbin 1.17.0")  
+            #    return ""
               
             # Handle line breaks
             processed_args = [args[0]]  

@@ -1,0 +1,39 @@
+{  
+  "branches": ["main"],  
+  "plugins": [  
+    "@semantic-release/commit-analyzer",  
+    "@semantic-release/release-notes-generator",  
+    [  
+      "@semantic-release/changelog",  
+      {  
+        "changelogFile": "CHANGELOG.md"  
+      }  
+    ],  
+    [  
+      "@semantic-release/exec",  
+      {  
+        "prepareCmd": "python scripts/update_version.py ${nextRelease.version}",  
+        "publishCmd": "python setup.py sdist bdist_wheel && twine upload dist/*"  
+      }  
+    ],  
+    [  
+      "@semantic-release/github",  
+      {  
+        "assets": [  
+          {  
+            "path": "dist/*.whl",  
+            "label": "Python Wheel"  
+          },  
+          {  
+            "path": "dist/*.tar.gz",  
+            "label": "Source Distribution"  
+          },  
+          {  
+            "path": "dist/casbin-cli-*",  
+            "label": "Binary Executable"  
+          }  
+        ]  
+      }  
+    ]  
+  ]  
+}
