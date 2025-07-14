@@ -2,16 +2,16 @@ name: Release
   
 on:  
   push:  
-    branches: [main]  
+    branches: [master]  
   pull_request:  
-    branches: [main]  
+    branches: [master]  
   
 jobs:  
   test:  
     runs-on: ubuntu-latest  
     strategy:  
       matrix:  
-        python-version: [3.6, 3.7, 3.8, 3.9, "3.10"]  
+        python-version: ["3.9", "3.10", "3.11", "3.12"]  
       
     steps:  
     - uses: actions/checkout@v3  
@@ -33,11 +33,11 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]  
       
     steps:  
-    - uses: actions/checkout@v3  
+    - uses: actions/checkout@v4  
     - name: Set up Python  
-      uses: actions/setup-python@v3  
+      uses: actions/setup-python@v4  
       with:  
-        python-version: 3.9  
+        python-version: 3.11  
       
     - name: Install dependencies  
       run: |  
@@ -49,7 +49,7 @@ jobs:
       run: python scripts/build_binaries.py  
       
     - name: Upload artifacts  
-      uses: actions/upload-artifact@v3  
+      uses: actions/upload-artifact@v4  
       with:  
         name: binaries-${{ matrix.os }}  
         path: dist/casbin-cli-*  
@@ -60,15 +60,15 @@ jobs:
     if: github.ref == 'refs/heads/main'  
       
     steps:  
-    - uses: actions/checkout@v3  
+    - uses: actions/checkout@v4  
       with:  
         fetch-depth: 0  
         token: ${{ secrets.GITHUB_TOKEN }}  
       
     - name: Set up Python  
-      uses: actions/setup-python@v3  
+      uses: actions/setup-python@v4  
       with:  
-        python-version: 3.9  
+        python-version: 3.11  
       
     - name: Install dependencies  
       run: |  

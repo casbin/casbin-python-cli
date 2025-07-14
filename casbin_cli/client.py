@@ -1,10 +1,10 @@
 import argparse  
 import sys  
 import json  
-from .command_executor import CommandExecutor  
-from .enforcer_factory import EnforcerFactory  
-from .utils import process_line_breaks  
-from .__version__ import __version__
+from casbin_cli.command_executor import CommandExecutor    
+from casbin_cli.enforcer_factory import EnforcerFactory    
+from casbin_cli.utils import process_line_breaks 
+from casbin_cli.__version__ import __version__
   
 class Client:  
     @staticmethod  
