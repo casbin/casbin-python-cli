@@ -1,5 +1,6 @@
 {  
-  "branches": ["master"],  
+  "branches": ["master"],
+  "repositoryUrl": "https://github.com/Kevinkwok-hub/casbin-python-cli",  
   "plugins": [  
     "@semantic-release/commit-analyzer",  
     "@semantic-release/release-notes-generator",  
@@ -12,8 +13,7 @@
     [  
       "@semantic-release/exec",  
       {  
-        "prepareCmd": "python scripts/update_version.py ${nextRelease.version}",  
-        "publishCmd": "python setup.py sdist bdist_wheel && twine upload dist/*"  
+        "prepareCmd": "python scripts/update_version.py ${nextRelease.version}"
       }  
     ],  
     [  

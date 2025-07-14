@@ -57,7 +57,7 @@ jobs:
   release:  
     needs: [test, build-binaries]  
     runs-on: ubuntu-latest  
-    if: github.ref == 'refs/heads/main'  
+    if: github.ref == 'refs/heads/master'  
       
     steps:  
     - uses: actions/checkout@v4  
@@ -90,5 +90,5 @@ jobs:
     - name: Semantic Release  
       env:  
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}  
-        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  
+        #PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  
       run: npx semantic-release
