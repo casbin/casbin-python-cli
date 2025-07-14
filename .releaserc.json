@@ -29,8 +29,7 @@
             "label": "Source Distribution"  
           },  
           {  
-            "path": "dist/casbin-cli-*",  
-            "label": "Binary Executable"  
+            "path": "dist/casbin-cli-*"
           }  
         ]  
       }  
