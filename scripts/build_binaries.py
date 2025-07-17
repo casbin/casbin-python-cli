@@ -28,7 +28,7 @@ def build_binary():
     arch = platform.machine().lower()  
       
     # Build binary  
-    binary_name = f"casbin-cli-{system}-{arch}"  
+    binary_name = f"casbin-python-cli-{system}-{arch}"  
     if system == "windows":  
         binary_name += ".exe"  
       

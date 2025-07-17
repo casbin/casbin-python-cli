@@ -24,10 +24,10 @@ class Client:
             if command_name in ['-h', '--help']:  
                 Client._print_help()  
                 return ""  
-            #elif command_name in ['-v', '--version']:  
-            #    print(f"casbin-python-cli {__version__}")  
-            #    print("pycasbin 1.17.0")  
-            #    return ""
+            elif command_name in ['-v', '--version']:  
+                print(f"casbin-python-cli {__version__}")  
+                print("pycasbin 1.17.0")  
+                return ""
               
             # Handle line breaks
             processed_args = [args[0]]  

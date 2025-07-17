@@ -52,7 +52,7 @@ jobs:
       uses: actions/upload-artifact@v4  
       with:  
         name: binaries-${{ matrix.os }}  
-        path: dist/casbin-cli-*  
+        path: dist/casbin-python-cli-*  
   
   release:  
     needs: [test, build-binaries]  
@@ -85,10 +85,11 @@ jobs:
     - name: Move binaries to dist  
       run: |  
         mkdir -p dist  
-        find artifacts -name "casbin-cli-*" -exec cp {} dist/ \;  
+        find artifacts -name "casbin-python-cli-*" -exec cp {} dist/ \;  
       
     - name: Semantic Release  
       env:  
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         #PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  
       run: npx semantic-release
