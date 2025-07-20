@@ -1,6 +1,6 @@
 {  
   "branches": ["master"],
-  "repositoryUrl": "https://github.com/casbin/casbin-python-cli",
+  "repositoryUrl":"https://github.com/casbin/casbin-python-cli",
   "plugins": [  
     "@semantic-release/commit-analyzer",  
     "@semantic-release/release-notes-generator",  
@@ -29,7 +29,9 @@
             "label": "Source Distribution"  
           },  
           {  
-            "path": "dist/casbin-cli-*"
+            "path": "dist/casbin-python-cli-*",
+            "name": "casbin-python-cli-${nextRelease.version}",  
+            "label": "casbin-python-cli (${nextRelease.version})"
           }  
         ]  
       }  
