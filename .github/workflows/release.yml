@@ -2,9 +2,7 @@ name: Release
   
 on:  
   push:  
-    branches: 
-      - master
-      - '**'  
+    branches: [master]
   pull_request:  
     branches: [master]  
   
@@ -92,6 +90,5 @@ jobs:
     - name: Semantic Release  
       env:  
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         #PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  
       run: npx semantic-release

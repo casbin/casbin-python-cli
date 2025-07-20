@@ -72,15 +72,17 @@ class CommandExecutor:
                 'hasPermissionForUser': 'has_permission_for_user',  
                 'getImplicitRolesForUser': 'get_implicit_roles_for_user',  
                 'getImplicitPermissionsForUser': 'get_implicit_permissions_for_user',  
-                'getImplicitUsersForRole': 'get_implicit_users_for_role'  
+                'getImplicitUsersForRole': 'get_implicit_users_for_role',
+                'addPolicies': 'add_policies',  
             }  
               
               
             actual_method_name = method_mapping.get(self.command_name, self.command_name)  
               
-              
-            if not hasattr(self.enforcer, actual_method_name):  
-                raise AttributeError(f"Method '{actual_method_name}' not found")  
+
+            if not hasattr(self.enforcer, actual_method_name):      
+                available_methods = [method for method in dir(self.enforcer) if not method.startswith('_')]  
+                raise AttributeError(f"Method '{actual_method_name}' not found. Available methods: {available_methods[:10]}...")  
   
             method = getattr(self.enforcer, actual_method_name)  
   
@@ -93,7 +95,7 @@ class CommandExecutor:
             # Build response with standardized format  
             response = ResponseBody()  
   
-            # Process result based on return type - 与Java版本保持一致  
+            # Process result based on return type 
             if isinstance(result, bool):  
                 response.allow = result  
                 response.explain = None
@@ -134,8 +136,12 @@ class CommandExecutor:
             # Return JSON response with consistent formatting  
             return json.dumps(response.to_dict(), separators=(',', ':'), ensure_ascii=False)  
   
-        except Exception as e:  
-            raise Exception(f"Error executing command '{self.command_name}': {str(e)}")  
+        except Exception as e:      
+            import sys  
+            if hasattr(sys, '_called_from_test') or 'pytest' in sys.modules:  
+                raise Exception(f"Error executing command '{self.command_name}': {str(e)}")  
+            else:  
+                raise Exception(f"Error executing command '{self.command_name}': {str(e)}")  
   
     def _convert_arguments(self, method, args: List[str]) -> List[Any]:  
         """Convert string arguments to appropriate types based on method signature"""  
@@ -171,7 +177,7 @@ class CommandExecutor:
                 try: 
                     result = self.enforcer.batch_enforce(batch_requests)  
                     print(f"DEBUG: Batch enforce result: {result}")  
-                    return batch_requests  # 返回转换后的参数  
+                    return batch_requests   
                 except Exception as e:  
                     print(f"DEBUG: Error in batch_enforce: {e}")  
                     raise 

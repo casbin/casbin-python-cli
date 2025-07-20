@@ -53,14 +53,19 @@ class Client:
             result = executor.execute()  
               
             print(result)  
-            return result  
-              
-        except Exception as e:  
-            error_msg = str(e) or str(e.__cause__) if e.__cause__ else "Unknown error"  
-            print(error_msg)  
-            sys.exit(1)  
+            return result
           
-        return ""  
+        except Exception as e:   
+            if hasattr(e, '__cause__') and e.__cause__:  
+                error_msg = f"{str(e)}: {str(e.__cause__)}"  
+            else:  
+                error_msg = str(e) if str(e) else f"{type(e).__name__}: {repr(e)}"  
+        
+            if hasattr(sys, '_called_from_test') or 'pytest' in sys.modules:  
+                raise type(e)(error_msg) from e  
+            else:  
+                print(error_msg)  
+                sys.exit(1)
       
     @staticmethod  
     def _parse_args(args):  
