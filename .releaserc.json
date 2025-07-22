@@ -1,6 +1,6 @@
 {  
-  "branches": ["master"],
-  "repositoryUrl":"https://github.com/casbin/casbin-python-cli",
+  "branches": ["master"],  
+  "repositoryUrl": "https://github.com/casbin/casbin-python-cli",  
   "plugins": [  
     "@semantic-release/commit-analyzer",  
     "@semantic-release/release-notes-generator",  
@@ -13,27 +13,19 @@
     [  
       "@semantic-release/exec",  
       {  
-        "prepareCmd": "python scripts/update_version.py ${nextRelease.version}"
+        "prepareCmd": "python scripts/update_version.py ${nextRelease.version}"  
       }  
     ],  
     [  
       "@semantic-release/github",  
       {  
         "assets": [  
-          {  
-            "path": "dist/*.whl",  
-            "label": "Python Wheel"  
-          },  
-          {  
-            "path": "dist/*.tar.gz",  
-            "label": "Source Distribution"  
-          },  
-          {  
-            "path": "dist/casbin-python-cli-*",
-            "name": "casbin-python-cli-${nextRelease.version}",  
-            "label": "casbin-python-cli (${nextRelease.version})"
-          }  
-        ]  
+          "dist/casbin-python-cli-linux-*",  
+          "dist/casbin-python-cli-darwin-*",  
+          "dist/casbin-python-cli-windows-*"  
+        ],  
+        "successComment": false,  
+        "failComment": false  
       }  
     ]  
   ]  
