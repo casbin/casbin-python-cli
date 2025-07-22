@@ -57,8 +57,8 @@ jobs:
     - name: Upload artifacts  
       uses: actions/upload-artifact@v4  
       with:  
-        name: binaries-${{ matrix.os }}  
-        path: ist/casbin-python-cli-${{ matrix.platform }}* 
+        name: binaries-${{ matrix.platform }}  
+        path: dist/casbin-python-cli-${{ matrix.platform }}* 
   
   release:  
     needs: [test, build-binaries]  
@@ -91,7 +91,7 @@ jobs:
     - name: Move binaries to dist  
       run: |  
         mkdir -p dist  
-        find artifacts -name "casbin-python-cli-*" -type f -exec cp {} dist/ \;
+        find artifacts -name "casbin-python-cli-*" -exec cp {} dist/ \;
       
     - name: Semantic Release  
       env:  
