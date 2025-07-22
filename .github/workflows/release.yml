@@ -52,7 +52,7 @@ jobs:
         pip install pyinstaller  
       
     - name: Build binary  
-      run: python scripts/build_binaries.py  
+      run: python scripts/build_binaries.py --platform ${{ matrix.platform }}
       
     - name: Upload artifacts  
       uses: actions/upload-artifact@v4  
@@ -92,7 +92,6 @@ jobs:
       run: |  
         mkdir -p dist  
         find artifacts -name "casbin-python-cli-*" -type f -exec cp {} dist/ \;
-        ls -la dist/  
       
     - name: Semantic Release  
       env:  
