@@ -65,7 +65,8 @@ def build_binary():
         
     cmd = [    
         "pyinstaller",    
-        "--onefile",    
+        "--onefile",
+        "--runtime-tmpdir", "./temp",    
         "--name", binary_name,
         "--console",    
         "--paths", ".",    
